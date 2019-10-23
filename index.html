@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Movies</title>
     <!--https://www.bootstrapcdn.com/ -->
+    <script src="main.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -16,60 +17,53 @@
   <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <!--div class="mobile"-->
-    <a class="navbar-brand" href="./index.html">MovieTime</a>
-  <!--/div-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!--div class="mobile"-->
+        <a class="navbar-brand mobile" href="./index.html">MovieTime</a>
+      <!--/div-->
 
-  <!--div class="mobile1"-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!--div class="mobile1"-->
+      <div class="search">
+        <form class="form-inline my-2 my-lg-0 searchbar">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search Movie" aria-label="Search">
+        </form>
+      </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./about.html">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./contact.html">Contact</a>
-        </li>
-        <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./contact.html">Contact</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+
+          </span>
+          <form class="form-inline my-2 my-lg-0 mobile">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Movie" aria-label="Search">
           </form>
-        </li>
-      </ul>
-      <span class="navbar-text">
+        </div>
 
-      </span>
+      <!--/div-->
+
+    </nav>
+
+    <div class="container">
+        <div class="row top-buffer">
+        </div>
     </div>
-  <!--/div-->
 
-</nav>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
-
-
-  <script>
-
-
-      var movieData;
-      function loadData(){
-
-      }
-
-      function autocomplete(input, arr){
-        var current;
-        input.addEventListener("input", function(e){
-
-        });
-      }
-    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
   </body>
 </html>
