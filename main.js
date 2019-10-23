@@ -6,12 +6,12 @@ $(document).ready(function(){
     $.each(response, function(i, v) {
       var title = v.title;
       title = title.replace(/ /g,"+");
-      console.log(title);
+      //console.log(title);
       var imgLocation = "https://image.tmdb.org/t/p/w500";
       $.get(tmdbEndpoint + tmdbapikey + "&query=" + title, function(response1){
         imgLocation += response1.results[0]["poster_path"];
-        console.log(imgLocation);
-        console.log(tmdbEndpoint + tmdbapikey + "&query=" + title)
+        //console.log(imgLocation);
+        //console.log(tmdbEndpoint + tmdbapikey + "&query=" + title)
         //console.log(tmdbEndpoint + tmdbapikey + "&query=" + title);
         $(".row").append('<div class="col-sm-4">'+
                             '<div class="card">' +
@@ -35,5 +35,16 @@ function autocomplete(input, arr){
   var current;
   input.addEventListener("input", function(e){
 
+  });
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+  .then(function(reg) {
+    // registration worked
+    console.log('Registration succeeded. Scope is ' + reg.scope);
+  }).catch(function(error) {
+    // registration failed
+    console.log('Registration failed with ' + error);
   });
 }
