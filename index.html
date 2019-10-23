@@ -19,15 +19,10 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <!--div class="mobile"-->
-        <a class="navbar-brand mobile" href="./index.html">MovieTime</a>
+        <a class="navbar-brand" href="./index.html">MovieTime</a>
       <!--/div-->
 
       <!--div class="mobile1"-->
-      <div class="search">
-        <form class="form-inline my-2 my-lg-0 searchbar">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search Movie" aria-label="Search">
-        </form>
-      </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -45,38 +40,50 @@
               <a class="nav-link" href="./contact.html">Contact</a>
             </li>
           </ul>
-          <span class="navbar-text">
+          <!--<span class="navbar-text">
 
-          </span>
+          </span>-->
         </div>
 
       <!--/div-->
 
     </nav>
-    <form class="form-inline my-2 my-lg-0 mobile">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Movie" aria-label="Search">
-    </form>
-
-    <div class="container">
-        <div class="row top-buffer">
+    <div>
+      <div>
+      <form>
+        <div class="row">
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Search Movie">
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Search Location">
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Day">
+          </div>
         </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button>
+          </div>
+        </div>
+      </form>
     </div>
+
+      <div class="container">
+          <div class="row top-buffer">
+
+          </div>
+      </div>
+    </div>
+
+
+
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
 
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-        .then(function(reg) {
-          // registration worked
-          console.log('Registration succeeded. Scope is ' + reg.scope);
-        }).catch(function(error) {
-          // registration failed
-          console.log('Registration failed with ' + error);
-        });
-      }
-    </script>
+
   </body>
 </html>
