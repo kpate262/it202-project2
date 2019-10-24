@@ -7,22 +7,14 @@
     <meta name="viewport" content="width=device-width">
     <title>Movies</title>
     <!--https://www.bootstrapcdn.com/ -->
-    <script src="main.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
     </head>
 
   <body>
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <!--div class="mobile"-->
         <a class="navbar-brand" href="./index.html">MovieTime</a>
-      <!--/div-->
 
-      <!--div class="mobile1"-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -31,57 +23,92 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#mainpage">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./about.html">About</a>
+              <a class="nav-link" href="#search">Search<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./contact.html">Contact</a>
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
             </li>
           </ul>
-          <!--<span class="navbar-text">
-
-          </span>-->
         </div>
-
-      <!--/div-->
-
     </nav>
-    <div>
-      <div>
-      <form>
-        <div class="row">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Search Movie">
-          </div>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Search Location">
-          </div>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Day">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <button>
-          </div>
-        </div>
-      </form>
-    </div>
 
+    <div class="content" id="mainpage">
       <div class="container">
-          <div class="row top-buffer">
+          <div class="row top-buffer mainpage" id="accordion">
 
           </div>
       </div>
     </div>
 
+    <div class="content" id="search">
+      <form >
+        <div class="row padding">
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Movie">
+          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Location">
+
+          </div>
+          <div class="col-sm-4">
+            <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+              <option selected>Choose Day</option>
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="7">Sunday</option>
+            </select>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked="checked">
+              <label class="form-check-label" for="inlineCheckbox1" >Upcoming</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="searchbutton">
+          <button type="Submit" class="btn btn-primary searchbutton">Search</button>
+        </div>
+      </form>
+    </div>
 
 
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
+    <div class="content" id="about">
+      <h4>You can access the website from https://kpate262.github.io/it202-project2/index.html</h4>
+      <h5 >
+        <a href="https://www.themoviedb.org/">
+        Movie Posters are called from themoviedb website
+        </a>
+      </h5>
+    </div>
+
+    <div class="content" id="contact">
+      <html>
+        <div class="text-center">
+          <img src="https://media.licdn.com/dms/image/C5603AQG7D-UYz9nqJw/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=Z2hbLaeo6FpcuJeulsKUNvIBu_GcmVnjpAK-ove65Ao" class="rounded" alt="...">
+        </div>
+        <h1>Kisan Patel</h1>
+        <h3>Student @ UIC</h3>
+        <h3>Email: kpate262@uic.edu</h3>
+        <h3>Github: https://github.com/kpate262</h3>
+        <h3>LinkedIn: https://www.linkedin.com/in/kisan-patel-uic-cs/<h3>
+      </html>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./main.js"></script>
 
 

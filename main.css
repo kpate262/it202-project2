@@ -3,8 +3,24 @@
 }
 
 .top-buffer {
-  margin-top:40px;
-  margin-bottom: 40px;
+  margin-top:10px !important;
+  margin-bottom: 10px !important;
+
+}
+
+.padding{
+  padding-right: 5% !important;
+  padding-left: 5% !important;
+  padding-top: 20px;
+}
+
+
+
+.searchbutton{
+  padding-right: 5% !important;
+  padding-left: 5% !important;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -21,7 +37,13 @@
   }
 
   .searchbutton{
-    width: 30% !important;
+    width: 100% !important;
+  }
+
+  .padding{
+    padding-right: 5% !important;
+    padding-left: 5% !important;
+    padding-top: 20px;
   }
 
 }
