@@ -71,7 +71,7 @@ $(document).ready(function(){
                                       '</button>'+
                                     '</h5>' +
                                   '</div>' +
-                                  '<div id="' + id2 + '" class="collapse" aria-labelledby="' + id1 + '" data-parent="#accordion">'+
+                                  '<div id="' + id2 + '" class="collapse" aria-labelledby="' + id1 + '" >'+
                                     '<div class="card-body">'+
                                       '<h6>Location: ' + v.park + '</h6>' +
                                       '<h6>Address: ' + v.park_address + '</h6>' +
