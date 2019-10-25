@@ -49,14 +49,17 @@
     </div>
 
     <div class="content" id="search">
-      <form >
+      <form autocomplete="off">
         <div class="row padding">
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Movie">
+            <div class="autocomplete" style="width:300px !important;">
+              <input id="moviename" name="movietitles" type="text" class="form-control" placeholder="Movie">
+            </div>
           </div>
           <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Location">
-
+            <div class="autocomplete" style="width:300px !important;">
+              <input id="parklocation" type="text" class="form-control" placeholder="Location">
+            </div>
           </div>
           <div class="col-sm-4">
             <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
@@ -109,9 +112,10 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./main.js"></script>
+
 
 
   </body>
