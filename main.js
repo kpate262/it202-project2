@@ -211,12 +211,14 @@ function autocomplete(inp, arr) {
   }
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
+      
       closeAllLists(e.target);
   });
 }
 
 autocomplete(document.getElementById("moviename"), titles);
 autocomplete(document.getElementById("parklocation"), locations);
+
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js')

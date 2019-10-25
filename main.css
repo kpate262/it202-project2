@@ -6,6 +6,7 @@
   margin-top:10px !important;
   margin-bottom: 10px !important;
 
+  margin-right: -90px !important;
 }
 
 .padding{
@@ -16,6 +17,7 @@
 
 body{
   padding-top: 60px;
+  font: 16px Arial;
 }
 
 .searchbutton{
@@ -24,6 +26,7 @@ body{
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
 
 @media only screen and (max-width: 767px) {
   .mobile{
@@ -50,12 +53,8 @@ body{
 
 }
 
-* {
-  box-sizing: border-box !important;
-}
-
-body {
-  font: 16px Arial;
+#mainpage{
+  width: 100% !important;
 }
 
 /*the container must be positioned relative:*/
