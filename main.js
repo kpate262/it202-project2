@@ -80,31 +80,30 @@ $(document).ready(function(){
           cc = "Not Available";
         }
 
+        var overview = "";
+        try{
+          overview = response1.results[0]["overview"];
+        }
+        catch(error){
+          console.log("No overview for movie " + v.title + "\nError: " + error);
+          overview = "No overview available for this movie";
+        }
+
         var date = (v.date).replace("T00:00:00.000", "");
-        $(".mainpage").append('<div class="col-sm-4">'+
+        $(".mainpage").append('<div class="col-sm-4 listall">'+
                             '<div class="card">' +
                                   '<img class="card-img-top img-fluid" src=' + imgLocation +' alt="Card image cap">' +
                                   '<div class="card-block">' +
                                       '<h3 class="card-title">'+ v.title +'</h4>'+
+                                      '<h6><b>Rating:</b> ' + v.rating + '</h6>'+
+                                      '<h6><b>Overview:</b> ' + overview + '</h6>'+
+                                      '<h6><b>Location:</b> ' + v.park + '</h6>' +
+                                      '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
+                                      '<h6><b>Date:</b> ' + date + '</h6>' +
+                                      '<h6><b>Closed-Caption:</b> ' + cc + '</h6>'+
                                   '</div>' +
-                                  '<div class="card-header" id="' + id1 + '">'+
-                                    '<h5 class="mb-0">' +
-                                      '<button class="btn btn-link" data-toggle="collapse" data-target="#' + id2 + '" aria-expanded="false" aria-controls="' + id2 + '">'+
-                                        'Info'+
-                                      '</button>'+
-                                    '</h5>' +
-                                  '</div>' +
-                                  '<div id="' + id2 + '" class="collapse" aria-labelledby="' + id1 + '" >'+
-                                    '<div class="card-body">'+
-                                      '<h6>Location: ' + v.park + '</h6>' +
-                                      '<h6>Address: ' + v.park_address + '</h6>' +
-                                      '<h6>Date: ' + date + '</h6>' +
-                                      '<h6>Closed-Caption: ' + cc + '</h6>'+
-                                    '</div>'+
-                                  '</div>'+
                                 '</div>'+
-                              '</div>'+
-                          '</div>');
+                            '</div>');
        imgLocation = "";
         //console.log(imgLocation);
       });
