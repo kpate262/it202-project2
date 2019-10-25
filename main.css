@@ -14,7 +14,9 @@
   padding-top: 20px;
 }
 
-
+body{
+  padding-top: 60px;
+}
 
 .searchbutton{
   padding-right: 5% !important;

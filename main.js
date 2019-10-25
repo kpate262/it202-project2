@@ -4,6 +4,8 @@ var tmdbEndpoint = "https://api.themoviedb.org/3/search/movie?api_key="
 var movies = [];
 var sortedByDate = [];
 
+var counter = 0;
+
 function create_UUID(){
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -27,6 +29,16 @@ $(document).ready(function(){
     hideScreens();
     var target = $(this).attr("href");
     $(target).show();
+  });
+
+  $(".navbar-toggler").on("click", function(){
+    if(counter % 2 != 0){
+      $("body").css("padding-top", "60px");
+    }
+    else{
+      $("body").css("padding-top", "220px");
+    }
+    counter++;
   });
 
   $.get(endpoint+"?$SELECT=*", function(response){
