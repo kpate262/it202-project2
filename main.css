@@ -5,8 +5,6 @@
 .top-buffer {
   margin-top:10px !important;
   margin-bottom: 10px !important;
-
-  margin-right: -90px !important;
 }
 
 .padding{
@@ -20,12 +18,19 @@ body{
   font: 16px Arial;
 }
 
+.card{
+  border: none !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
 .searchbutton{
   padding-right: 5% !important;
   padding-left: 5% !important;
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
 
 
 @media only screen and (max-width: 767px) {
@@ -51,6 +56,26 @@ body{
     padding-top: 20px;
   }
 
+  .top-buffer {
+    margin-top:10px !important;
+    margin-bottom: 10px !important;
+    margin-right: -90px !important;
+  }
+
+  .viewButtons{
+    padding-right: 5% !important;
+    padding-left: 5% !important;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .infobutton{
+    width: 50% !important;
+  }
+
+  .mapbutton{
+    width: 50% !important;
+  }
 }
 
 #mainpage{

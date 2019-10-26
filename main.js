@@ -48,8 +48,40 @@ $(document).ready(function(){
     //console.log(movies);
     $.each(response, function(i, v) {
       movies.push(v);
-      titles.push(v.title);
-      locations.push(v.park);
+      var dup = 0;
+      for(var j = 0; j < i; j++){
+        if(titles[j] === v.title){
+          dup = 0;
+          break;
+        }
+        else{
+          if(j+1 == i){
+            dup = 1;
+          }
+          continue;
+        }
+      }
+      if(dup == 1){
+        titles.push(v.title);
+      }
+
+      dup = 0;
+      for(var j = 0; j < i; j++){
+        if(locations[j] === v.park){
+          dup = 0;
+          break;
+        }
+        else{
+          if(j+1 == i){
+            dup = 1;
+          }
+          continue;
+        }
+      }
+
+      if(dup == 1){
+        locations.push(v.park);
+      }
       var title = v.title;
       title = title.replace(/ /g,"+");
       //console.log(title);
@@ -89,7 +121,12 @@ $(document).ready(function(){
           overview = "No overview available for this movie";
         }
 
-        var date = (v.date).replace("T00:00:00.000", "");
+        var date = new Date(v.date);//(v.date).replace("T00:00:00.000", "");
+
+        var options = { month: 'long'};
+        var month = new Intl.DateTimeFormat('en-US', options).format(date);
+
+
         $(".mainpage").append('<div class="col-sm-4 listall">'+
                             '<div class="card">' +
                                   '<img class="card-img-top img-fluid" src=' + imgLocation +' alt="Card image cap">' +
@@ -99,7 +136,7 @@ $(document).ready(function(){
                                       '<h6><b>Overview:</b> ' + overview + '</h6>'+
                                       '<h6><b>Location:</b> ' + v.park + '</h6>' +
                                       '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
-                                      '<h6><b>Date:</b> ' + date + '</h6>' +
+                                      '<h6><b>Date:</b> ' + month + " " + date.getDay()+ ", "+ date.getFullYear() + '</h6>' +
                                       '<h6><b>Closed-Caption:</b> ' + cc + '</h6>'+
                                   '</div>' +
                                 '</div>'+
@@ -211,7 +248,7 @@ function autocomplete(inp, arr) {
   }
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
-      
+
       closeAllLists(e.target);
   });
 }
