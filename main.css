@@ -18,22 +18,31 @@ body{
   font: 16px Arial;
 }
 
+.switch{
+  margin-left: 70px !important;
+}
 .card{
   border: none !important;
   margin-top: 5px !important;
   margin-bottom: 5px !important;
 }
 
-.searchbutton{
+.searchbutton, .submitbutton{
   padding-right: 5% !important;
   padding-left: 5% !important;
   padding-top: 10px;
   padding-bottom: 20px;
 }
 
-
+.content{
+  display: none;
+}
 
 @media only screen and (max-width: 767px) {
+  .switch{
+    margin-left: 14px !important;
+  }
+
   .mobile{
     display: none !important;
   }
@@ -46,7 +55,7 @@ body{
     width: 130% !important;
   }
 
-  .searchbutton{
+  .searchbutton, .submitbutton{
     width: 100% !important;
   }
 

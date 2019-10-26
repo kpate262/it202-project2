@@ -19,6 +19,121 @@ function create_UUID(){
 }
 
 $(document).ready(function(){
+  $('.switch').hide();
+
+  var switchboxcounter = 0;
+  $('#customSwitch1').on("click", function(){
+    if(switchboxcounter % 2 == 0){
+      $('#customSwitch1').attr('value', 'o2');
+      $('.cardsonquerypage').hide();
+    }
+    else{
+      $('#customSwitch1').attr('value', 'o1');
+      $('.cardsonquerypage').show();
+    }
+    console.log(switchboxcounter);
+    switchboxcounter++;
+  });
+
+  var checkboxcounter = 0;
+  $("#inlineCheckbox1").on("click", function(){
+    if(checkboxcounter % 2 == 0){
+      $('#inlineCheckbox1').attr('value', 'o2');
+    }
+    else{
+      $('#inlineCheckbox1').attr('value', 'o1');
+    }
+    console.log(checkboxcounter);
+    checkboxcounter++;
+  });
+
+  $( ".searchbutton" ).unbind( "click" );
+
+  $(".submitbutton").click(function(e){
+    e.preventDefault();
+    if($('.alert').length){
+      $('.alert').remove();
+    }
+    if($("#parklocation").val() === "" && $("#moviename").val() === ""
+      && $("#inlineFormCustomSelect").val() === "ChooseDay"){
+      hideScreens();
+      $('#search').show();
+      $(".forWarning").append('<div class="alert alert-warning" role="alert">'+
+                                  'Please select at least one input!!' +
+                              '</div>');
+    }
+    else{
+      hideScreens();
+      var buildList = [];
+      if($("#inlineFormCustomSelect").val() === "ChooseDay"){
+        $('#search').show();
+        $(".forWarning").append('<div class="alert alert-warning" role="alert">'+
+                                    'Please select a Day!!' +
+                                '</div>');
+      }
+      else{
+        console.log("here");
+        $.each(movies, function(i, v){
+          if($("#inlineCheckbox1").val() === 'o1'){
+            console.log("box is checked");
+            var date = new Date(v.date);
+            var currdate = new Date();
+            if(currdate.getFullYear() <= date.getFullYear() && currdate.getDate() <= date.getDate() &&
+                currdate.getMonth() <= date.getMonth()){
+              if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
+                   if(v.park === $("#parklocation").val()){
+                     buildList.push(v);
+                   }
+              }
+              else if($("#moviename").val() !== "" && $("#parklocation").val() === ""){
+                if(v.title === $("#moviename").val()){
+                  buildList.push(v);
+                }
+              }
+              else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
+                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val()){
+                  buildList.push(v);
+                  console.log(v.title + "unchecked");
+                }
+              }
+            }//Check if date is upcoming
+
+          }
+          else{
+              console.log("unchecked");
+              if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
+                   if(v.park === $("#parklocation").val()){
+                     buildList.push(v);
+                   }
+              }
+              else if($("#moviename").val() !== "" && $("#parklocation").val() === ""){
+                if(v.title === $("#moviename").val()){
+                  buildList.push(v);
+                }
+              }
+              else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
+                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val()){
+                  buildList.push(v);
+                  console.log(v.title + "unchecked");
+                }
+              }
+          }//if checkbox is checked or not
+        });
+
+        if(buildList.length === 0){
+          $('#search').show();
+          $(".forWarning").append('<div class="alert alert-warning" role="alert">'+
+                                      'No upcoming movies found by this movie name or location!!' +
+                                  '</div>');
+        }
+        else{
+          $('.switch').show();
+          addMovieCards(buildList, 0, '.querypage', 'cardsonquerypage')//each object
+        }//if list length is 0 or not
+      }
+    }
+  });
+
   $('#accordion').on('show hide', function() {
     $(this).css('height', '100%');
   });
@@ -30,6 +145,20 @@ $(document).ready(function(){
   $(".nav-link").on("click", function(){
     hideScreens();
     var target = $(this).attr("href");
+    if(target !== '#mainpage'){
+      $('#mainpage').hide();
+    }
+
+    if($('.alert').length){
+      $('.alert').remove();
+    }
+
+    if($('.cardsonquerypage').length > 0){
+      $('.cardsonquerypage').remove();
+    }
+
+    $('.switch').hide();
+
     $(target).show();
   });
 
@@ -44,114 +173,8 @@ $(document).ready(function(){
   });
 
   $.get(endpoint+"?$SELECT=*", function(response){
-    //movies = response;
-    //console.log(movies);
-    $.each(response, function(i, v) {
-      movies.push(v);
-      var dup = 0;
-      for(var j = 0; j < i; j++){
-        if(titles[j] === v.title){
-          dup = 0;
-          break;
-        }
-        else{
-          if(j+1 == i){
-            dup = 1;
-          }
-          continue;
-        }
-      }
-      if(dup == 1){
-        titles.push(v.title);
-      }
-
-      dup = 0;
-      for(var j = 0; j < i; j++){
-        if(locations[j] === v.park){
-          dup = 0;
-          break;
-        }
-        else{
-          if(j+1 == i){
-            dup = 1;
-          }
-          continue;
-        }
-      }
-
-      if(dup == 1){
-        locations.push(v.park);
-      }
-      var title = v.title;
-      title = title.replace(/ /g,"+");
-      //console.log(title);
-      var imgLocation = "https://image.tmdb.org/t/p/w500";
-      $.get(tmdbEndpoint + tmdbapikey + "&query=" + title, function(response1){
-        try{
-          imgLocation += response1.results[0]["poster_path"];
-        }
-        catch(error){
-          imgLocation = "https://picsum.photos/id/870/200/300?grayscale&blur=2";
-          console.log("Couldn't the poster image for " + v.title + ". \nError: " + error);
-        }
-        //console.log(imgLocation);
-        //console.log(tmdbEndpoint + tmdbapikey + "&query=" + title)
-        //console.log(tmdbEndpoint + tmdbapikey + "&query=" + title);
-
-        var temp = (v.title).replace(/ /g,"");
-        //console.log(i+temp);
-
-        var id1 = create_UUID();
-        var id2 = create_UUID();
-
-        var cc = "";
-        if(v.cc == "Y"){
-          cc = "Available";
-        }
-        else{
-          cc = "Not Available";
-        }
-
-        var overview = "";
-        try{
-          overview = response1.results[0]["overview"];
-        }
-        catch(error){
-          console.log("No overview for movie " + v.title + "\nError: " + error);
-          overview = "No overview available for this movie";
-        }
-
-        var date = new Date(v.date);//(v.date).replace("T00:00:00.000", "");
-
-        var options = { month: 'long'};
-        var month = new Intl.DateTimeFormat('en-US', options).format(date);
-
-
-        $(".mainpage").append('<div class="col-sm-4 listall">'+
-                            '<div class="card">' +
-                                  '<img class="card-img-top img-fluid" src=' + imgLocation +' alt="Card image cap">' +
-                                  '<div class="card-block">' +
-                                      '<h3 class="card-title">'+ v.title +'</h4>'+
-                                      '<h6><b>Rating:</b> ' + v.rating + '</h6>'+
-                                      '<h6><b>Overview:</b> ' + overview + '</h6>'+
-                                      '<h6><b>Location:</b> ' + v.park + '</h6>' +
-                                      '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
-                                      '<h6><b>Date:</b> ' + month + " " + date.getDay()+ ", "+ date.getFullYear() + '</h6>' +
-                                      '<h6><b>Closed-Caption:</b> ' + cc + '</h6>'+
-                                  '</div>' +
-                                '</div>'+
-                            '</div>');
-       imgLocation = "";
-        //console.log(imgLocation);
-      });
-      //console.log(imgLocation);
-
-    });//each object
+    addMovieCards(response, 1, '.mainpage', 'cardsonmainpage');//each object
   });//get everything
-  //sortedByDate = movies.slice().sort((a, b) => b.date - a.date)
-  //console.log(sortedByDate);
-  //console.log(movies);
-
 });//document
 
 //Used as refrence https://www.w3schools.com/howto/howto_js_autocomplete.asp
@@ -248,7 +271,6 @@ function autocomplete(inp, arr) {
   }
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
-
       closeAllLists(e.target);
   });
 }
@@ -266,4 +288,105 @@ if ('serviceWorker' in navigator) {
     // registration failed
     console.log('Registration failed with ' + error);
   });
+}
+
+function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
+  if(mainpagecards == 0){
+
+  }
+
+  $.each(movieobjects, function(i, v) {
+    if(mainpagecards == 1){
+      movies.push(v);
+      var dup = 0;
+      for(var j = 0; j < i; j++){
+        if(titles[j] === v.title){
+          dup = 0;
+          break;
+        }
+        else{
+          if(j+1 == i){
+            dup = 1;
+          }
+          continue;
+        }
+      }
+      if(dup == 1){
+        titles.push(v.title);
+      }
+
+      dup = 0;
+      for(var j = 0; j < i; j++){
+        if(locations[j] === v.park){
+          dup = 0;
+          break;
+        }
+        else{
+          if(j+1 == i){
+            dup = 1;
+          }
+          continue;
+        }
+      }
+
+      if(dup == 1){
+        locations.push(v.park);
+      }
+    }
+    var title = v.title;
+    title = title.replace(/ /g,"+");
+
+    var imgLocation = "https://image.tmdb.org/t/p/w500";
+    $.get(tmdbEndpoint + tmdbapikey + "&query=" + title, function(response1){
+      try{
+        imgLocation += response1.results[0]["poster_path"];
+      }
+      catch(error){
+        imgLocation = "https://picsum.photos/id/870/200/300?grayscale&blur=2";
+        console.log("Couldn't the poster image for " + v.title + ". \nError: " + error);
+      }
+
+      var cc = "";
+      if(v.cc == "Y"){
+        cc = "Available";
+      }
+      else{
+        cc = "Not Available";
+      }
+
+      var overview = "";
+      try{
+        overview = response1.results[0]["overview"];
+      }
+      catch(error){
+        console.log("No overview for movie " + v.title + "\nError: " + error);
+        overview = "No overview available for this movie";
+      }
+
+      var date = new Date(v.date);//(v.date).replace("T00:00:00.000", "");
+
+      var options = { month: 'long'};
+      var month = new Intl.DateTimeFormat('en-US', options).format(date);
+
+
+      $(targetclass).append('<div class="col-sm-4 '+ cardclass + '">'+
+                          '<div class="card">' +
+                                '<img class="card-img-top img-fluid" src=' + imgLocation +' alt="Card image cap">' +
+                                '<div class="card-block">' +
+                                    '<h3 class="card-title">'+ v.title +'</h4>'+
+                                    '<h6><b>Rating:</b> ' + v.rating + '</h6>'+
+                                    '<h6><b>Overview:</b> ' + overview + '</h6>'+
+                                    '<h6><b>Location:</b> ' + v.park + '</h6>' +
+                                    '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
+                                    '<h6><b>Date:</b> ('+ v.day + ') ' + month + " " + date.getDate()+ ", "+ date.getFullYear() + '</h6>' +
+                                    '<h6><b>Closed-Caption:</b> ' + cc + '</h6>'+
+                                '</div>' +
+                              '</div>'+
+                          '</div>');
+     imgLocation = "";
+      //console.log(imgLocation);
+    });
+    //console.log(imgLocation);
+
+  });//each object
 }

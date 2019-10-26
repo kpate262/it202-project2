@@ -23,7 +23,7 @@
 
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="#mainpage">Home<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
@@ -40,58 +40,64 @@
       </nav>
     </div>
 
-    <div class="content" id="mainpage">
+    <div id="mainpage">
       <div class="container">
-          <div class="row top-buffer mainpage accordion" id="accordionEx">
+          <div class="row top-buffer mainpage">
 
           </div>
       </div>
     </div>
 
     <div class="content" id="search">
-      <form autocomplete="off">
+      <form autocomplete="off" onsubmit="searchform.disabled = true; return true;">
         <div class="row padding">
           <div class="col-sm-4">
             <div class="autocomplete" style="width: 100% !important;">
-              <input id="moviename" name="movietitles" type="text" class="form-control" placeholder="Movie">
+              <input id="moviename" name="searchform" type="text" class="form-control" placeholder="Movie" >
             </div>
           </div>
           <div class="col-sm-4">
             <div class="autocomplete" style="width: 100% !important;">
-              <input id="parklocation" type="text" class="form-control" placeholder="Location">
+              <input id="parklocation" name="searchform" type="text" class="form-control" placeholder="Location">
             </div>
           </div>
           <div class="col-sm-4">
             <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-              <option selected>Choose Day</option>
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="7">Sunday</option>
+              <option value="ChooseDay" selected>Choose Day</option>
+              <option value="Mon">Monday</option>
+              <option value="Tue">Tuesday</option>
+              <option value="Wed">Wednesday</option>
+              <option value="Thu">Thursday</option>
+              <option value="Fri">Friday</option>
+              <option value="Sat">Saturday</option>
+              <option value="Sun">Sunday</option>
             </select>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked="checked">
+              <input class="form-check-input" name="searchform" type="checkbox" id="inlineCheckbox1" value="o1" checked>
               <label class="form-check-label" for="inlineCheckbox1" >Upcoming</label>
             </div>
           </div>
+        </div>
 
-        </div>
-        <div class="searchbutton">
-          <button type="Submit" class="btn btn-primary searchbutton">Search</button>
-        </div>
+
+
       </form>
-      <div class="btn-group btn-group-toggle viewButtons" data-toggle="buttons">
+      <div class="searchbutton">
+        <button type="Submit" class="btn btn-primary submitbutton">Search</button>
+      </div>
+      <div class="forWarning">
+
+      </div>
+      <!--div class="btn-group btn-group-toggle viewButtons" data-toggle="buttons">
         <label class="btn btn-secondary infobutton">
           <input type="radio" name="options" id="option1" autocomplete="off" checked>Info
         </label>
         <label class="btn btn-secondary mapbutton">
           <input type="radio" name="options" id="option2" autocomplete="off">Map
         </label>
-      </div>
+      </div-->
+
     </div>
 
     <div class="content" id="about">
@@ -104,7 +110,6 @@
     </div>
 
     <div class="content" id="contact">
-      <html>
         <div class="text-center">
           <img src="https://media.licdn.com/dms/image/C5603AQG7D-UYz9nqJw/profile-displayphoto-shrink_200_200/0?e=1577318400&v=beta&t=Z2hbLaeo6FpcuJeulsKUNvIBu_GcmVnjpAK-ove65Ao" class="rounded" alt="...">
         </div>
@@ -113,7 +118,18 @@
         <h3>Email: kpate262@uic.edu</h3>
         <h3>Github: https://github.com/kpate262</h3>
         <h3>LinkedIn: https://www.linkedin.com/in/kisan-patel-uic-cs/<h3>
-      </html>
+    </div>
+
+    <div id="queriedMovies">
+      <div class="custom-control custom-switch switch hide">
+        <input type="checkbox" value="o1" class="custom-control-input" id="customSwitch1">
+        <label class="custom-control-label" for="customSwitch1">Switch to map view</label>
+      </div>
+      <div class="container">
+          <div class="row top-buffer querypage" id="querypage">
+
+          </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
