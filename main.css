@@ -50,7 +50,7 @@ body{
 @media only screen and (max-width: 767px) {
   #map {
     margin-top: 5%;
-    height: 950px;  /* The height is 400 pixels */
+    height: 930px;  /* The height is 400 pixels */
     width: 130%;  /* The width is the width of the web page */
    }
 
