@@ -29,7 +29,7 @@ $(document).ready(function(){
       $('.cardsonquerypage').show();
       $('#map').hide();
     }
-    console.log(switchboxcounter);
+
     switchboxcounter++;
   });
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
     else{
       $('#inlineCheckbox1').attr('value', 'o1');
     }
-    console.log(checkboxcounter);
+
     checkboxcounter++;
   });
 
@@ -70,10 +70,8 @@ $(document).ready(function(){
                                 '</div>');
       }
       else{
-        console.log("here");
         $.each(movies, function(i, v){
           if($("#inlineCheckbox1").val() === 'o1'){
-            console.log("box is checked");
             var date = new Date(v.date);
             var currdate = new Date();
             if(currdate.getFullYear() <= date.getFullYear() && currdate.getDate() <= date.getDate() &&
@@ -91,14 +89,14 @@ $(document).ready(function(){
               else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
                 if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                   buildList.push(v);
-                  console.log(v.title + "unchecked");
+
                 }
               }
             }//Check if date is upcoming
 
           }
           else{
-              console.log("unchecked");
+
               if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
                    if(v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                      buildList.push(v);
@@ -112,7 +110,7 @@ $(document).ready(function(){
               else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
                 if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                   buildList.push(v);
-                  console.log(v.title + "unchecked");
+
                 }
               }
           }//if checkbox is checked or not
@@ -163,12 +161,20 @@ $(document).ready(function(){
       var options = { month: 'long'};
       var month = new Intl.DateTimeFormat('en-US', options).format(date);
 
+      var voteAverage = 0;
+      try{
+        voteAverage = response1.results[0]["vote_average"];
+      }
+      catch(error){
+        console.log("Rating not available for this movie " + v.title + "\nError: " + error);
+        voteAverage = 0.0;
+      }
 
       var contentString = '<div>'+
                             '<div class="card">' +
                                 '<div class="card-block">' +
                                     '<h3 class="card-title">'+ v.title +'</h4>'+
-                                    '<h6><b>Rating:</b> ' + v.rating + '</h6>'+
+                                    '<h6><b>Rating:</b> ' + v.rating + '     <b>Stars:</b> ' + voteAverage + '/10</h6>'+
                                     '<h6><b>Overview:</b> ' + overview + '</h6>'+
                                     '<h6><b>Location:</b> ' + v.park + '</h6>' +
                                     '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
@@ -186,7 +192,7 @@ $(document).ready(function(){
     try{
       lati = parseFloat(v.location.latitude);
       long = parseFloat(v.location.longitude);
-      console.log(lati);
+
     }
     catch(error){
       lati = 41.8781;
@@ -264,7 +270,6 @@ $(document).ready(function(){
 
 
 function initMap() {
-  console.log("map");
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 41.8781, lng: -87.6298},
     zoom: 10
@@ -468,13 +473,21 @@ function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
       var options = { month: 'long'};
       var month = new Intl.DateTimeFormat('en-US', options).format(date);
 
+      var voteAverage = 0;
+      try{
+        voteAverage = response1.results[0]["vote_average"];
+      }
+      catch(error){
+        console.log("Rating not available for this movie " + v.title + "\nError: " + error);
+        voteAverage = "NA";
+      }
 
       $(targetclass).append('<div class="col-sm-4 '+ cardclass + '">'+
                           '<div class="card">' +
                                 '<img class="card-img-top img-fluid" src=' + imgLocation +' alt="Card image cap">' +
                                 '<div class="card-block">' +
                                     '<h3 class="card-title">'+ v.title +'</h4>'+
-                                    '<h6><b>Rating:</b> ' + v.rating + '</h6>'+
+                                    '<h6><b>Rating:</b> ' + v.rating + '    <b>Stars:</b> '+ voteAverage + '/10</h6>'+
                                     '<h6><b>Overview:</b> ' + overview + '</h6>'+
                                     '<h6><b>Location:</b> ' + v.park + '</h6>' +
                                     '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
@@ -484,9 +497,8 @@ function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
                               '</div>'+
                           '</div>');
      imgLocation = "";
-      //console.log(imgLocation);
     });
-    //console.log(imgLocation);
+
 
   });//each object
 }
