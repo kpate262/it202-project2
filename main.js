@@ -225,6 +225,10 @@ $(document).ready(function(){
       $('.alert').remove();
     }
 
+    document.getElementById("queryForm").reset();
+    checkboxcounter = 0;
+    $('#inlineCheckbox1').attr('value', 'o1');
+    //$("#inlineFormCustomSelect").attr()
 
     if($('.cardsonquerypage').length > 0){
       $('.cardsonquerypage').remove();
@@ -235,8 +239,8 @@ $(document).ready(function(){
       zoom: 10
     });
 
-    $('#customSwitch1').attr('value', 'o1');
     switchboxcounter = 0;
+    $("#customSwitch1").removeAttr('checked');
 
     $('.switch').hide();
     $('#map').hide();
@@ -267,7 +271,8 @@ function initMap() {
   });
 }//initMap()
 
-//Used as refrence https://www.w3schools.com/howto/howto_js_autocomplete.asp
+
+//Used https://www.w3schools.com/howto/howto_js_autocomplete.asp for autocomplete feature
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -308,6 +313,8 @@ function autocomplete(inp, arr) {
         }
       }
   });
+
+
   /*execute a function presses a key on the keyboard:*/
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
@@ -333,6 +340,8 @@ function autocomplete(inp, arr) {
         }
       }
   });
+
+
   function addActive(x) {
     /*a function to classify an item as "active":*/
     if (!x) return false;

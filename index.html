@@ -49,7 +49,7 @@
     </div>
 
     <div class="content" id="search">
-      <form autocomplete="off" onsubmit="searchform.disabled = true; return true;">
+      <form autocomplete="off" id="queryForm">
         <div class="row padding">
           <div class="col-sm-4">
             <div class="autocomplete" style="width: 100% !important;">
@@ -78,14 +78,13 @@
               <label class="form-check-label" for="inlineCheckbox1" >Upcoming</label>
             </div>
           </div>
+
         </div>
-
-
-
+        <div class="searchbutton">
+          <button type="Submit" class="btn btn-primary submitbutton">Search</button>
+        </div>
       </form>
-      <div class="searchbutton">
-        <button type="Submit" class="btn btn-primary submitbutton">Search</button>
-      </div>
+
       <div class="forWarning">
 
       </div>
