@@ -232,7 +232,7 @@ $(document).ready(function(){
 
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 41.8781, lng: -87.6298},
-      zoom: 8
+      zoom: 10
     });
 
     $('#customSwitch1').attr('value', 'o1');
@@ -263,7 +263,7 @@ function initMap() {
   console.log("map");
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 41.8781, lng: -87.6298},
-    zoom: 8
+    zoom: 10
   });
 }//initMap()
 
