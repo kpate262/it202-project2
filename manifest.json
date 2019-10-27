@@ -6,7 +6,6 @@
   "background_color": "navy",
   "description": "Search movies near you.",
   "icons": [{
-    "src": "./logo.png",
     "sizes": "192x192",
     "type": "image/png",
     "_comment": "Logo image used from https://www.vecteezy.com/vector-art/640572-simple-letter-m-logo-design-template"
