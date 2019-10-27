@@ -89,15 +89,6 @@
       <div class="forWarning">
 
       </div>
-      <!--div class="btn-group btn-group-toggle viewButtons" data-toggle="buttons">
-        <label class="btn btn-secondary infobutton">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked>Info
-        </label>
-        <label class="btn btn-secondary mapbutton">
-          <input type="radio" name="options" id="option2" autocomplete="off">Map
-        </label>
-      </div-->
-
     </div>
 
     <div class="content" id="about">
@@ -121,20 +112,24 @@
     </div>
 
     <div id="queriedMovies">
-      <div class="custom-control custom-switch switch hide">
+      <div class="custom-control custom-switch switch">
         <input type="checkbox" value="o1" class="custom-control-input" id="customSwitch1">
-        <label class="custom-control-label" for="customSwitch1">Switch to map view</label>
+        <label class="custom-control-label" for="customSwitch1">Switch to info/map view</label>
       </div>
       <div class="container">
           <div class="row top-buffer querypage" id="querypage">
 
           </div>
       </div>
+      <div id="map"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN8jZWJRzdTAJmWXOZEAAT07BT1C5vf0U&callback=initMap"
+    async defer></script>
+
 
   </body>
 </html>

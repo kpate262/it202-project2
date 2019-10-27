@@ -5,31 +5,29 @@ var movies = [];
 var titles = [];
 var locations= [];
 var sortedByDate = [];
-
+var lati = 0.0;
+var long = 0.0;
 var counter = 0;
 
-function create_UUID(){
-    var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (dt + Math.random()*16)%16 | 0;
-        dt = Math.floor(dt/16);
-        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-}
+var map;
+
+
 
 $(document).ready(function(){
   $('.switch').hide();
+  $('#map').hide();
 
   var switchboxcounter = 0;
   $('#customSwitch1').on("click", function(){
     if(switchboxcounter % 2 == 0){
       $('#customSwitch1').attr('value', 'o2');
       $('.cardsonquerypage').hide();
+      $('#map').show();
     }
     else{
       $('#customSwitch1').attr('value', 'o1');
       $('.cardsonquerypage').show();
+      $('#map').hide();
     }
     console.log(switchboxcounter);
     switchboxcounter++;
@@ -81,17 +79,17 @@ $(document).ready(function(){
             if(currdate.getFullYear() <= date.getFullYear() && currdate.getDate() <= date.getDate() &&
                 currdate.getMonth() <= date.getMonth()){
               if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
-                   if(v.park === $("#parklocation").val()){
+                   if(v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                      buildList.push(v);
                    }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() === ""){
-                if(v.title === $("#moviename").val()){
+                if(v.title === $("#moviename").val() && $("#inlineFormCustomSelect").val() === v.day){
                   buildList.push(v);
                 }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
-                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val()){
+                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                   buildList.push(v);
                   console.log(v.title + "unchecked");
                 }
@@ -102,17 +100,17 @@ $(document).ready(function(){
           else{
               console.log("unchecked");
               if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
-                   if(v.park === $("#parklocation").val()){
+                   if(v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                      buildList.push(v);
                    }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() === ""){
-                if(v.title === $("#moviename").val()){
+                if(v.title === $("#moviename").val() && $("#inlineFormCustomSelect").val() === v.day){
                   buildList.push(v);
                 }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
-                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val()){
+                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
                   buildList.push(v);
                   console.log(v.title + "unchecked");
                 }
@@ -129,10 +127,84 @@ $(document).ready(function(){
         else{
           $('.switch').show();
           addMovieCards(buildList, 0, '.querypage', 'cardsonquerypage')//each object
+
+          $.each(buildList, function(i, v){
+            createMarker(v);
+          });
         }//if list length is 0 or not
       }
     }
   });
+
+  function createMarker(v){
+    var title = v.title;
+    title = title.replace(/ /g,"+");
+
+    $.get(tmdbEndpoint + tmdbapikey + "&query=" + title, function(response1){
+      var cc = "";
+      if(v.cc == "Y"){
+        cc = "Available";
+      }
+      else{
+        cc = "Not Available";
+      }
+
+      var overview = "";
+      try{
+        overview = response1.results[0]["overview"];
+      }
+      catch(error){
+        console.log("No overview for movie " + v.title + "\nError: " + error);
+        overview = "No overview available for this movie";
+      }
+
+      var date = new Date(v.date);//(v.date).replace("T00:00:00.000", "");
+
+      var options = { month: 'long'};
+      var month = new Intl.DateTimeFormat('en-US', options).format(date);
+
+
+      var contentString = '<div>'+
+                            '<div class="card">' +
+                                '<div class="card-block">' +
+                                    '<h3 class="card-title">'+ v.title +'</h4>'+
+                                    '<h6><b>Rating:</b> ' + v.rating + '</h6>'+
+                                    '<h6><b>Overview:</b> ' + overview + '</h6>'+
+                                    '<h6><b>Location:</b> ' + v.park + '</h6>' +
+                                    '<h6><b>Address:</b> ' + v.park_address + '</h6>' +
+                                    '<h6><b>Date:</b> ('+ v.day + ') ' + month + " " + date.getDate()+ ", "+ date.getFullYear() + '</h6>' +
+                                    '<h6><b>Closed-Caption:</b> ' + cc + '</h6>'+
+                                '</div>' +
+                              '</div>'+
+                          '</div>';
+     imgLocation = "";
+
+     var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    try{
+      lati = parseFloat(v.location.latitude);
+      long = parseFloat(v.location.longitude);
+      console.log(lati);
+    }
+    catch(error){
+      lati = 41.8781;
+      long = -87.6298;
+    }
+
+    var marker = new google.maps.Marker({
+      position: {lat: lati, lng: long},
+      map: map,
+      title: v.title
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  });
+
+}
 
   $('#accordion').on('show hide', function() {
     $(this).css('height', '100%');
@@ -153,12 +225,21 @@ $(document).ready(function(){
       $('.alert').remove();
     }
 
+
     if($('.cardsonquerypage').length > 0){
       $('.cardsonquerypage').remove();
     }
 
-    $('.switch').hide();
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 41.8781, lng: -87.6298},
+      zoom: 8
+    });
 
+    $('#customSwitch1').attr('value', 'o1');
+    switchboxcounter = 0;
+
+    $('.switch').hide();
+    $('#map').hide();
     $(target).show();
   });
 
@@ -176,6 +257,15 @@ $(document).ready(function(){
     addMovieCards(response, 1, '.mainpage', 'cardsonmainpage');//each object
   });//get everything
 });//document
+
+
+function initMap() {
+  console.log("map");
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 41.8781, lng: -87.6298},
+    zoom: 8
+  });
+}//initMap()
 
 //Used as refrence https://www.w3schools.com/howto/howto_js_autocomplete.asp
 function autocomplete(inp, arr) {
@@ -294,7 +384,7 @@ function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
   if(mainpagecards == 0){
 
   }
-
+  console.log(movieobjects);
   $.each(movieobjects, function(i, v) {
     if(mainpagecards == 1){
       movies.push(v);
@@ -332,6 +422,7 @@ function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
       if(dup == 1){
         locations.push(v.park);
       }
+
     }
     var title = v.title;
     title = title.replace(/ /g,"+");
