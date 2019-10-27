@@ -51,7 +51,7 @@ body{
   #map {
     margin-top: 5%;
     height: 930px;  /* The height is 400 pixels */
-    width: 130%;  /* The width is the width of the web page */
+    width: 120%;  /* The width is the width of the web page */
    }
 
   .switch{
