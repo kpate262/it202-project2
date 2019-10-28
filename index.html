@@ -42,6 +42,8 @@
 
     <div id="mainpage">
       <div class="container">
+          <div class="mainpageresults">
+          </div>
           <div class="row top-buffer mainpage">
 
           </div>
@@ -62,7 +64,7 @@
             </div>
           </div>
           <div class="col-sm-4">
-            <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+            <!--label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
               <option value="ChooseDay" selected>Choose Day</option>
               <option value="Mon">Monday</option>
@@ -72,7 +74,36 @@
               <option value="Fri">Friday</option>
               <option value="Sat">Saturday</option>
               <option value="Sun">Sunday</option>
-            </select>
+            </select-->
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Monday">
+              <label class="form-check-label" for="Monday" >Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Tuesday">
+              <label class="form-check-label" for="Tuesday" >Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Wednesday" >
+              <label class="form-check-label" for="Wednesday" >Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Thursday" >
+              <label class="form-check-label" for="Thursday" >Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Friday" >
+              <label class="form-check-label" for="Friday" >Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Saturday" >
+              <label class="form-check-label" for="Saturday" >Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="searchform" type="checkbox" id="Sunday" >
+              <label class="form-check-label" for="Sunday" >Sunday</label>
+            </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" name="searchform" type="checkbox" id="inlineCheckbox1" value="o1" checked>
               <label class="form-check-label" for="inlineCheckbox1" >Upcoming</label>
@@ -116,6 +147,8 @@
         <label class="custom-control-label" for="customSwitch1">Switch to info/map view</label>
       </div>
       <div class="container">
+        <div class="querypageresults">
+        </div>
           <div class="row top-buffer querypage" id="querypage">
 
           </div>

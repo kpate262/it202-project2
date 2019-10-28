@@ -43,14 +43,20 @@ body{
 
 #map {
   margin-top: 10px;
-  height: 950px;  /* The height is 950 pixels */
+  margin-left: 2px;
+  margin-right:2px;
+  margin-bottom: 2px;
+  height: 800px;  /* The height is 950 pixels */
   width: 100%;  /* The width is the width of the web page */
  }
 
 @media only screen and (max-width: 767px) {
   #map {
-    margin-top: 5%;
-    height: 930px;  /* The height is 400 pixels */
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-right:2px;
+    margin-bottom: 2px;
+    height: 800px;  /* The height is 400 pixels */
     width: 120%;  /* The width is the width of the web page */
    }
 

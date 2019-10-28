@@ -8,6 +8,7 @@ var sortedByDate = [];
 var lati = 0.0;
 var long = 0.0;
 var counter = 0;
+var dayCheckbox = ["#Monday", "#Tuesday", "#Wednesday", "#Thursday", "#Friday", "#Saturday", "#Sunday"];
 
 var map;
 
@@ -22,15 +23,95 @@ $(document).ready(function(){
     if(switchboxcounter % 2 == 0){
       $('#customSwitch1').attr('value', 'o2');
       $('.cardsonquerypage').hide();
+      $('.querypageresults').hide();
       $('#map').show();
     }
     else{
       $('#customSwitch1').attr('value', 'o1');
       $('.cardsonquerypage').show();
+      $('.querypageresults').show();
       $('#map').hide();
     }
 
     switchboxcounter++;
+  });
+
+  var monday = 0;
+  $("#Monday").on("click", function(){
+    monday++;
+    if(monday % 2 == 0){
+      $('#Monday').attr('value', 'not');
+    }
+    else{
+      $('#Monday').attr('value', 'Mon');
+    }
+  });
+
+  var tuesday = 0;
+  $("#Tuesday").on("click", function(){
+    tuesday++;
+    if(tuesday % 2 == 0){
+      $('#Tuesday').attr('value', 'not');
+    }
+    else{
+      $('#Tuesday').attr('value', 'Tue');
+    }
+  });
+
+  var wednesday = 0;
+  $("#Wednesday").on("click", function(){
+    wednesday++;
+    if(wednesday % 2 == 0){
+      $('#Wednesday').attr('value', 'not');
+    }
+    else{
+      $('#Wednesday').attr('value', 'Wed');
+    }
+  });
+
+  var thursday = 0;
+  $("#Thursday").on("click", function(){
+    thursday++;
+    if(thursday % 2 == 0){
+      $('#Thursday').attr('value', 'not');
+    }
+    else{
+      $('#Thursday').attr('value', 'Thu');
+    }
+  });
+
+
+  var friday = 0;
+  $("#Friday").on("click", function(){
+    friday++;
+    if(friday % 2 == 0){
+      $('#Friday').attr('value', 'not');
+    }
+    else{
+      $('#Friday').attr('value', 'Fri');
+    }
+  });
+
+  var saturday = 0;
+  $("#Saturday").on("click", function(){
+    saturday++;
+    if(saturday % 2 == 0){
+      $('#Saturday').attr('value', 'not');
+    }
+    else{
+      $('#Saturday').attr('value', 'Sat');
+    }
+  });
+
+  var sunday = 0;
+  $("#Sunday").on("click", function(){
+    sunday++;
+    if(sunday % 2 == 0){
+      $('#Sunday').attr('value', 'not');
+    }
+    else{
+      $('#Sunday').attr('value', 'Sun');
+    }
   });
 
   var checkboxcounter = 0;
@@ -63,13 +144,23 @@ $(document).ready(function(){
     else{
       hideScreens();
       var buildList = [];
-      if($("#inlineFormCustomSelect").val() === "ChooseDay"){
+      var anychecboxchecked = 0;
+
+      if(monday % 2 != 0 || tuesday % 2 != 0 || wednesday % 2 != 0 || thursday % 2 != 0 || friday % 2 != 0 || saturday % 2 != 0
+        || sunday % 2 != 0){
+          anychecboxchecked = 1;
+      }
+
+
+      //if($("#inlineFormCustomSelect").val() === "ChooseDay"){
+      if(anychecboxchecked === 0){
         $('#search').show();
         $(".forWarning").append('<div class="alert alert-warning" role="alert">'+
                                     'Please select a Day!!' +
                                 '</div>');
       }
       else{
+        console.log("Check1" );
         $.each(movies, function(i, v){
           if($("#inlineCheckbox1").val() === 'o1'){
             var date = new Date(v.date);
@@ -77,17 +168,26 @@ $(document).ready(function(){
             if(currdate.getFullYear() <= date.getFullYear() && currdate.getDate() <= date.getDate() &&
                 currdate.getMonth() <= date.getMonth()){
               if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
-                   if(v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
+                   if(v.park === $("#parklocation").val() &&
+                   ($("#Monday").val() === v.day || $("#Tuesday").val() === v.day || $("#Wednesday").val() === v.day
+                    || $("#Thursday").val() === v.day || $("#Friday").val() === v.day || $("#Saturday").val() === v.day
+                    || $("#Sunday").val() === v.day) ) {
                      buildList.push(v);
                    }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() === ""){
-                if(v.title === $("#moviename").val() && $("#inlineFormCustomSelect").val() === v.day){
+                if(v.title === $("#moviename").val() &&
+                ($("#Monday").val() === v.day || $("#Tuesday").val() === v.day || $("#Wednesday").val() === v.day
+                 || $("#Thursday").val() === v.day || $("#Friday").val() === v.day || $("#Saturday").val() === v.day
+                 || $("#Sunday").val() === v.day)){
                   buildList.push(v);
                 }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
-                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
+                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() &&
+                ($("#Monday").val() === v.day || $("#Tuesday").val() === v.day || $("#Wednesday").val() === v.day
+                 || $("#Thursday").val() === v.day || $("#Friday").val() === v.day || $("#Saturday").val() === v.day
+                 || $("#Sunday").val() === v.day)){
                   buildList.push(v);
 
                 }
@@ -98,17 +198,24 @@ $(document).ready(function(){
           else{
 
               if($("#moviename").val() === "" && $("#parklocation").val() !== "" ){
-                   if(v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
+                   if(v.park === $("#parklocation").val() && ($("#Monday").val() === v.day || $("#Tuesday").val() === v.day || $("#Wednesday").val() === v.day
+                    || $("#Thursday").val() === v.day || $("#Friday").val() === v.day || $("#Saturday").val() === v.day
+                    || $("#Sunday").val() === v.day)){
                      buildList.push(v);
                    }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() === ""){
-                if(v.title === $("#moviename").val() && $("#inlineFormCustomSelect").val() === v.day){
+                if(v.title === $("#moviename").val() && ($("#Monday").val() === v.day || $("#Tuesday").val() === v.day || $("#Wednesday").val() === v.day
+                 || $("#Thursday").val() === v.day || $("#Friday").val() === v.day || $("#Saturday").val() === v.day
+                 || $("#Sunday").val() === v.day)){
                   buildList.push(v);
                 }
               }
               else if($("#moviename").val() !== "" && $("#parklocation").val() !== ""){
-                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() && $("#inlineFormCustomSelect").val() === v.day){
+                if(v.title === $("#moviename").val() && v.park === $("#parklocation").val() &&
+                ($("#Monday").val() === v.day || $("#Tuesday").val() === v.day || $("#Wednesday").val() === v.day
+                 || $("#Thursday").val() === v.day || $("#Friday").val() === v.day || $("#Saturday").val() === v.day
+                 || $("#Sunday").val() === v.day)){
                   buildList.push(v);
 
                 }
@@ -124,7 +231,10 @@ $(document).ready(function(){
         }
         else{
           $('.switch').show();
-          addMovieCards(buildList, 0, '.querypage', 'cardsonquerypage')//each object
+          $(".querypageresults").append('<div class="card numresults">' +
+                                        '<h6>About '+ buildList.length +' results</h6>'+
+                                      '</div>');
+          addMovieCards(buildList, 0, '.querypage', 'cardsonquerypage');//each object
 
           $.each(buildList, function(i, v){
             createMarker(v);
@@ -193,21 +303,21 @@ $(document).ready(function(){
       lati = parseFloat(v.location.latitude);
       long = parseFloat(v.location.longitude);
 
+      var marker = new google.maps.Marker({
+        position: {lat: lati, lng: long},
+        map: map,
+        title: v.title
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+
     }
     catch(error){
-      lati = 41.8781;
-      long = -87.6298;
+      console.log("No longitude or latitude found. \n" + error);
     }
 
-    var marker = new google.maps.Marker({
-      position: {lat: lati, lng: long},
-      map: map,
-      title: v.title
-    });
-
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
   });
 
 }
@@ -229,6 +339,21 @@ $(document).ready(function(){
 
     if($('.alert').length){
       $('.alert').remove();
+    }
+
+    if($('.numresults').length){
+      $('.numresults').remove();
+    }
+
+    monday = 0;
+    tuesday = 0;
+    wednesday = 0;
+    thursday = 0;
+    friday = 0;
+    saturday = 0;
+
+    for(var j = 0; j < dayCheckbox.length; j++){
+      $(dayCheckbox[j]).attr('value', 'not');
     }
 
     document.getElementById("queryForm").reset();
@@ -264,6 +389,9 @@ $(document).ready(function(){
   });
 
   $.get(endpoint+"?$SELECT=*", function(response){
+    $(".mainpageresults").append('<div class="card">' +
+                                  '<h6>About '+ response.length +' results</h6>'+
+                                '</div>');
     addMovieCards(response, 1, '.mainpage', 'cardsonmainpage');//each object
   });//get everything
 });//document
@@ -395,9 +523,6 @@ if ('serviceWorker' in navigator) {
 }
 
 function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
-  if(mainpagecards == 0){
-
-  }
   console.log(movieobjects);
   $.each(movieobjects, function(i, v) {
     if(mainpagecards == 1){
@@ -481,6 +606,7 @@ function addMovieCards(movieobjects, mainpagecards, targetclass, cardclass){
         console.log("Rating not available for this movie " + v.title + "\nError: " + error);
         voteAverage = "NA";
       }
+
 
       $(targetclass).append('<div class="col-sm-4 '+ cardclass + '">'+
                           '<div class="card">' +
