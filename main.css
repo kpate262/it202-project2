@@ -64,6 +64,12 @@ body{
     margin-left: 14px !important;
   }
 
+  .autocomplete {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2px !important;
+  }
+
   .mobile{
     display: none !important;
   }
